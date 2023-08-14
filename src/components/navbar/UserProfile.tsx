@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IMAGE_URL } from "../../api/config";
 import { User, UserRole } from "../../context/Auth/AuthType";
-import { defaultImgURL } from "../../data/dummy-data";
 import { useAuth } from "../../hooks/useAuth";
 import { useCart } from "../../hooks/useCart";
 

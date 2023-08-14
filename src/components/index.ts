@@ -7,4 +7,3 @@ export { default as PriceUSField } from "./ui/PriceUSField/PriceUSField";
 export { default as SelectField } from "./ui/SelectField/SelectField";
 export { default as TextArea } from "./ui/TextArea/TextArea";
 export { default as TextField } from "./ui/TextField/TextField";
-export { default as UploadFileField } from "./ui/UploadFile/UploadFileField";

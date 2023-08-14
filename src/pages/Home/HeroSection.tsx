@@ -1,5 +1,3 @@
-import React from "react";
-
 import { BiSearchAlt } from "react-icons/bi";
 import SearchBook from "../../components/book/SearchBook";
 import { useAuth } from "../../hooks/useAuth";

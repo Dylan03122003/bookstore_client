@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 import { API_URL } from "../../api/config";
 import { Button, TextField } from "../../components";
 import LoadingButton from "../../components/ui/LoadingButton";

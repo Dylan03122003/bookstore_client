@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { API_URL, IMAGE_URL } from "../../api/config";
 import AdminPageContainer from "../../components/wrapper/AdminPageContainer";
@@ -34,6 +34,7 @@ const UserDetailPage = () => {
 
     getAnUser();
     //
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (isLoading) {

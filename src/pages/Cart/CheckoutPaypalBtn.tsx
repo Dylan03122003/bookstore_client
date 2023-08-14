@@ -21,7 +21,6 @@ const CheckoutPaypalBtn = ({
   orders: initialOrders,
 }: CheckoutPaypalBtnProps) => {
   const [error, setError] = useState<unknown>(null);
-  const [isLoading, setIsLoading] = useState(false);
   const { user } = useAuth();
   const { addOrders } = useOrder();
   const { clearCart } = useCart();
@@ -36,8 +35,6 @@ const CheckoutPaypalBtn = ({
   }, [initialPrice, initialOrders]);
 
   const handleApprove = async () => {
-    setIsLoading(true);
-
     try {
       const response = await axios.post(
         `${API_URL}/orders`,
@@ -58,7 +55,6 @@ const CheckoutPaypalBtn = ({
       console.log("MY ERROR: ", error);
     }
 
-    setIsLoading(false);
     console.log("Successfully checked out");
   };
 
@@ -68,6 +64,7 @@ const CheckoutPaypalBtn = ({
   }
 
   const createOrder = (data: any, actions: any) => {
+    console.log(data);
     const totalPrice = priceRef.current.toFixed(2) + "";
     console.log("price in create order: ", totalPrice);
     console.log("description: ", description);
@@ -87,10 +84,13 @@ const CheckoutPaypalBtn = ({
     <PayPalButtons
       disabled={isDisabledButton}
       onClick={(data, actions) => {
+        console.log(data);
+        console.log(actions);
         console.log("BUTTON CLICKED");
       }}
       createOrder={createOrder}
       onApprove={async (data, actions) => {
+        console.log(data);
         if (actions.order) {
           console.log("Approving order...");
           const order = await actions.order.capture();

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { IMAGE_URL } from "../../api/config";
 import AdminPageContainer from "../../components/wrapper/AdminPageContainer";
@@ -9,6 +9,7 @@ const UsersPage = () => {
 
   useEffect(() => {
     loadAllUsers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function goToDetailPage(userID: string) {

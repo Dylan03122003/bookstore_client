@@ -20,7 +20,6 @@ const TextArea = ({
   placeholder,
   required = false,
   onChange,
-  refresh = false,
   className,
   backgroundColor = "bg-admin-page",
   value,

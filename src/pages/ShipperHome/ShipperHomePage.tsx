@@ -48,6 +48,7 @@ const ShipperHomePage = () => {
       }
     }
     getOrdersOfEachUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function goToDetailPage(userID: string) {

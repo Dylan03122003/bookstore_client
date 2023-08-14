@@ -1,6 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import React, { useState } from "react";
-import { MdClear } from "react-icons/md";
+import { useState } from "react";
 import { TbSelector } from "react-icons/tb";
 import { TiTick } from "react-icons/ti";
 import styles from "./../ui/SelectField/SelectField.module.css";
@@ -30,7 +29,8 @@ const SingleSelect = ({
     `${defaultSelected}`,
   ]);
   const [open, setOpen] = useState<boolean>(false);
-  const [choices, setChoices] = useState<string[]>(defaultChoices);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [choices] = useState<string[]>(defaultChoices);
 
   function hasError() {
     return false;

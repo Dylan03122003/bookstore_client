@@ -1,5 +1,4 @@
 import React, { ChangeEvent, useState } from "react";
-import { isValidEmail } from "../../../utils/validateEmail";
 import styles from "./EmailField.module.css";
 
 type EmailFieldProps = {

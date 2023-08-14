@@ -10,7 +10,7 @@ import { useCart } from "../../hooks/useCart";
 import LoadingBook from "../../pages/BookDetail/LoadingBook";
 import AverageRating from "../rating/AverageRating";
 import AddToCartBtn from "../ui/AddToCartBtn";
-import Modal from "../ui/Modal/modal";
+import Modal from "../ui/Modal/Modal";
 import BookReviewForm from "./BookReviewForm";
 import Categories from "./Categories";
 import Reviews from "./Reviews";

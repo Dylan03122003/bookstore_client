@@ -10,7 +10,8 @@ import { useAuth } from "../../hooks/useAuth";
 import { useBook } from "../../hooks/useBook";
 import LoadingBook from "../../pages/BookDetail/LoadingBook";
 import AverageRating from "../rating/AverageRating";
-import Modal from "../ui/Modal/modal";
+// import Modal from "../ui/Modal/modal";
+import Modal from "../ui/Modal/Modal";
 import Categories from "./Categories";
 import Reviews from "./Reviews";
 const BookDetailAdmin = () => {
@@ -35,6 +36,7 @@ const BookDetailAdmin = () => {
 
   useEffect(() => {
     getABook();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function handleDeletingDecision() {

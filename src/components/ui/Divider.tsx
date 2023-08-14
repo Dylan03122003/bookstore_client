@@ -1,5 +1,3 @@
-import React from "react";
-
 type DividerProps = {
   width?: string;
   marginY?: string;
