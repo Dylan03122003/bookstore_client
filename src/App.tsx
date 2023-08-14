@@ -1,5 +1,4 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import TestComponent from "./components/TestComponent";
 import NavbarAdmin from "./components/navbar-admin/NavbarAdmin";
 import Navbar from "./components/navbar/Navbar";
 import { UserRole } from "./context/Auth/AuthType";
@@ -101,8 +100,6 @@ const App = () => {
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
-
-        <Route path="/test" element={<TestComponent />} />
 
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
