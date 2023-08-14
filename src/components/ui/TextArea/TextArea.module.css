@@ -1,0 +1,18 @@
+.textarea-container {
+}
+
+.textarea-container label span {
+  color: red;
+}
+
+.textarea-container textarea {
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
+
+  resize: none;
+  outline: none;
+  scrollbar-width: 0;
+  border-radius: 5px;
+  padding: 0.5rem;
+  font-size: 1rem;
+}

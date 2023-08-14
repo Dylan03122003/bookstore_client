@@ -1,0 +1,144 @@
+.select-container {
+  position: relative;
+}
+
+.select-field {
+  min-height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+  border-radius: 5px;
+  /* border: 1px solid #adb5bd; */
+}
+
+.select-field.has-selected-item {
+  border: 1px solid var(--border-blue);
+}
+
+.select-field.has-selected-item .toggle-btn svg {
+  color: var(--border-blue);
+}
+
+.selected-item-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-x: scroll;
+  gap: 1rem;
+}
+
+.selected-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  gap: 0.5rem;
+  padding: 0.2rem;
+  border: 1px solid #adb5bd;
+}
+
+.selected-item span {
+  width: max-content;
+}
+
+.selected-item button {
+  display: flex;
+  cursor: pointer;
+  background: none;
+  font-size: 1.6rem;
+  border: none;
+  justify-content: center;
+  align-items: center;
+}
+.selected-item button svg {
+  height: 1.6rem;
+  width: 1.6rem;
+  color: #a4a4a4;
+}
+
+.toggle-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+.toggle-btn svg {
+  color: var(--text-gray);
+  height: 1.6rem;
+  width: 1.6rem;
+}
+
+.choice-container {
+  max-height: 10rem;
+  min-height: 5rem;
+  overflow: scroll;
+  position: absolute;
+  top: 6rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  z-index: 10;
+  border-radius: 5px;
+  background-color: white;
+  padding: 0.5rem;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+.choice-container button {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  width: 99.5%;
+  background: none;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  color: var(--text-dark);
+  font-weight: 400;
+}
+
+.choice-container button:hover {
+  background-color: var(--hover-blue);
+}
+
+.choice-container button div {
+  width: 1rem;
+  height: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  border: 1px solid var(--gray-100);
+}
+
+.choice-container button div.selected {
+  background-color: var(--blue-500);
+  border: none;
+}
+
+.choice-container button div.selected + p {
+  color: var(--blue-400);
+}
+
+.choice-container button div.selected svg {
+  display: block;
+  color: white;
+}
+
+.choice-container button div svg {
+  display: none;
+}
+
+/* Hide the scrollbar but still scrolling */
+.choice-container::-webkit-scrollbar {
+  display: none;
+}
+
+.selected-item-container::-webkit-scrollbar {
+  display: none;
+}

@@ -1,0 +1,18 @@
+.text-container {
+}
+
+.text-container label {
+  margin-bottom: 0.5rem;
+}
+.text-container label span {
+  color: red;
+}
+
+.text-container input[type="email"] {
+  padding: 0.5rem;
+  font-size: 1rem;
+  color: var(--text-gray);
+
+  outline: none;
+  border-radius: 5px;
+}

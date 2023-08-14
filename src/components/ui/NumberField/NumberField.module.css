@@ -1,0 +1,15 @@
+.number-container {
+}
+
+.number-container label span {
+  color: red;
+}
+
+.number-container input[type="number"] {
+  padding: 0.65rem;
+  font-size: 1rem;
+  color: var(--text-gray);
+
+  outline: none;
+  border-radius: 5px;
+}
