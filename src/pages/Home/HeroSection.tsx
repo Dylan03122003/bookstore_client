@@ -21,10 +21,10 @@ const HeroSection = () => {
           bank. Join us and find your perfect book today!
         </p>
         <div className={`${style.hero_bottom}`}>
-          <a href="" className="text-base">
+          {/* <a href="" className="text-base">
             <BiSearchAlt className="w-6 h-6 mr-2" />
             Search Book
-          </a>
+          </a> */}
 
           <div className={style.user_buy}>
             <img src={TruyCap} alt="" />

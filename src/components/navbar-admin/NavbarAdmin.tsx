@@ -20,7 +20,7 @@ const NavbarAdmin = () => {
   }
 
   return (
-    <header className="w-full md:w-96 bg-white relative">
+    <header className="w-full md:w-96 bg-white relative z-50">
       <nav className="flex items-center justify-between md:flex-col flex-row">
         <div className="flex items-center justify-normal gap-5">
           <button

@@ -45,10 +45,6 @@ const Navbar = () => {
           >
             <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
               <li>
-                <Link to="/">Best seller</Link>
-              </li>
-
-              <li>
                 <Link to="/about">About</Link>
               </li>
               {!user && (
