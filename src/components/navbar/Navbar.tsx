@@ -32,7 +32,7 @@ const Navbar = () => {
           </button>
           <Link
             to="/"
-            className="flex items-center justify-center gap-3 my-8 ml-4 mr-14"
+            className="flex items-center justify-center gap-3 my-8 ml-4 mr-5"
           >
             <img src={StoryBoundLogo} alt="Logo" className="w-[153px]" />
             {/* <p className="font-semibold">Storybound</p> */}
