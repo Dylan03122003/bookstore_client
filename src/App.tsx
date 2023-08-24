@@ -31,7 +31,7 @@ const App = () => {
     return (
       <div>
         <Navbar />
-        <div className="h-[104px] w-full bg-red-100"></div>
+        <div className="h-[104px] w-full"></div>
         <Routes>
           <Route path="/" element={<ShipperHomePage />} />
 
@@ -78,7 +78,7 @@ const App = () => {
   return (
     <div>
       <Navbar />
-      <div className="h-[104px] w-full bg-red-100"></div>
+      <div className="h-[104px] w-full"></div>
       <Routes>
         <Route path="/" element={<HomePage />} />
 
