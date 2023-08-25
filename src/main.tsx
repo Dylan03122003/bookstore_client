@@ -1,6 +1,7 @@
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
 import { CLIENT_ID } from "./../secure-data.ts";
 import App from "./App.tsx";
@@ -11,20 +12,24 @@ import { CartProvider } from "./context/Cart/CartContext.tsx";
 import { OrderProvider } from "./context/Order/OrderContext.tsx";
 import "./index.css";
 
+const queryClient = new QueryClient();
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <AuthProvider>
-      <BookProvider>
-        <CartProvider>
-          <OrderProvider>
-            <BrowserRouter>
-              <PayPalScriptProvider options={{ clientId: CLIENT_ID }}>
-                <App />
-              </PayPalScriptProvider>
-            </BrowserRouter>
-          </OrderProvider>
-        </CartProvider>
-      </BookProvider>
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <BookProvider>
+          <CartProvider>
+            <OrderProvider>
+              <BrowserRouter>
+                <PayPalScriptProvider options={{ clientId: CLIENT_ID }}>
+                  <App />
+                </PayPalScriptProvider>
+              </BrowserRouter>
+            </OrderProvider>
+          </CartProvider>
+        </BookProvider>
+      </AuthProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );

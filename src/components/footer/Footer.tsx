@@ -12,97 +12,97 @@ const Footer = () => {
   return (
     <div className={styles.footer}>
       <div className={styles.footer_top}>
-        <table className={styles.footer_table}>
-          <tr>
-            <th className={styles.footer_th}>PRODUCT</th>
-          </tr>
-          <tr>
-            <td className={styles.footer_td}>Insights</td>
-          </tr>
-          <tr>
-            <td className={styles.footer_td}>Risk Processing</td>
-          </tr>
-          <tr>
-            <td className={styles.footer_td}>PCI Compliance</td>
-          </tr>
-          <tr>
-            <td className={styles.footer_td}>Integrations</td>
-          </tr>
-          <tr>
-            <td className={styles.footer_td}>Pricing</td>
-          </tr>
-        </table>
-        <table className={styles.footer_table}>
-          <tr>
-            <th className={styles.footer_th}>FOR DEVELOPERS</th>
-          </tr>
-          <tr>
-            <td className={styles.footer_td}>Docs</td>
-          </tr>
-          <tr>
-            <td className={styles.footer_td}>Knowledge base</td>
-          </tr>
-          <tr>
-            <td className={styles.footer_td}>Systom status</td>
-          </tr>
-          <tr>
-            <td className={styles.footer_td}>Tutorials</td>
-          </tr>
-          <tr>
-            <td className={styles.footer_td}>Blog</td>
-          </tr>
-        </table>
-        <table className={styles.footer_table}>
-          <tr>
-            <th className={styles.footer_th}>FOR BRANDS</th>
-          </tr>
-          <tr>
-            <td className={styles.footer_td}>Brands</td>
-          </tr>
-          <tr>
-            <td className={styles.footer_td}>Porformance Marketing</td>
-          </tr>
-          <tr>
-            <td className={styles.footer_td}>Publishers</td>
-          </tr>
-          <tr>
-            <td className={styles.footer_td}>Styleguide</td>
-          </tr>
-        </table>
-        <table className={styles.footer_table}>
-          <tr>
-            <th className={styles.footer_th}>RESOURCES</th>
-          </tr>
-          <tr>
-            <td className={styles.footer_td}>Cose Studios</td>
-          </tr>
-          <tr>
-            <td className={styles.footer_td}>Events</td>
-          </tr>
-          <tr>
-            <td className={styles.footer_td}>Blog</td>
-          </tr>
-          <tr>
-            <td className={styles.footer_td}>Portfolol</td>
-          </tr>
-        </table>
-        <table className={styles.footer_table}>
-          <tr>
-            <th className={styles.footer_th}>ABOUT</th>
-          </tr>
-          <tr>
-            <td className={styles.footer_td}>About us</td>
-          </tr>
-          <tr>
-            <td className={styles.footer_td}>Press/News</td>
-          </tr>
-          <tr>
-            <td className={styles.footer_td}>Careers/Team</td>
-          </tr>
-          <tr>
-            <td className={styles.footer_td}>Contact Us</td>
-          </tr>
-        </table>
+        <div className={styles.footer_table}>
+          <div>
+            <div className={styles.footer_th}>PRODUCT</div>
+          </div>
+          <div>
+            <div className={styles.footer_td}>Insights</div>
+          </div>
+          <div>
+            <div className={styles.footer_td}>Risk Processing</div>
+          </div>
+          <div>
+            <div className={styles.footer_td}>PCI Compliance</div>
+          </div>
+          <div>
+            <div className={styles.footer_td}>Integrations</div>
+          </div>
+          <div>
+            <div className={styles.footer_td}>Pricing</div>
+          </div>
+        </div>
+        <div className={styles.footer_table}>
+          <div>
+            <div className={styles.footer_th}>FOR DEVELOPERS</div>
+          </div>
+          <div>
+            <div className={styles.footer_td}>Docs</div>
+          </div>
+          <div>
+            <div className={styles.footer_td}>Knowledge base</div>
+          </div>
+          <div>
+            <div className={styles.footer_td}>Systom status</div>
+          </div>
+          <div>
+            <div className={styles.footer_td}>Tutorials</div>
+          </div>
+          <div>
+            <div className={styles.footer_td}>Blog</div>
+          </div>
+        </div>
+        <div className={styles.footer_table}>
+          <div>
+            <div className={styles.footer_th}>FOR BRANDS</div>
+          </div>
+          <div>
+            <div className={styles.footer_td}>Brands</div>
+          </div>
+          <div>
+            <div className={styles.footer_td}>Porformance Marketing</div>
+          </div>
+          <div>
+            <div className={styles.footer_td}>Publishers</div>
+          </div>
+          <div>
+            <div className={styles.footer_td}>Styleguide</div>
+          </div>
+        </div>
+        <div className={styles.footer_table}>
+          <div>
+            <div className={styles.footer_th}>RESOURCES</div>
+          </div>
+          <div>
+            <div className={styles.footer_td}>Cose Studios</div>
+          </div>
+          <div>
+            <div className={styles.footer_td}>Events</div>
+          </div>
+          <div>
+            <div className={styles.footer_td}>Blog</div>
+          </div>
+          <div>
+            <div className={styles.footer_td}>Portfolol</div>
+          </div>
+        </div>
+        <div className={styles.footer_table}>
+          <div>
+            <div className={styles.footer_th}>ABOUT</div>
+          </div>
+          <div>
+            <div className={styles.footer_td}>About us</div>
+          </div>
+          <div>
+            <div className={styles.footer_td}>Press/News</div>
+          </div>
+          <div>
+            <div className={styles.footer_td}>Careers/Team</div>
+          </div>
+          <div>
+            <div className={styles.footer_td}>Contact Us</div>
+          </div>
+        </div>
       </div>
       <hr />
       <div className={styles.footer_bottom}>
