@@ -1,9 +1,10 @@
-import axios from "axios";
 import { AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, Divider } from "..";
-import { API_URL, BOOK_IMG_URL } from "../../api/config";
+import { getBookDetail } from "../../api/books";
+import { BOOK_IMG_URL } from "../../api/config";
 import { Book, Review } from "../../context/Book/BookType";
 import { useAuth } from "../../hooks/useAuth";
 import { useCart } from "../../hooks/useCart";
@@ -15,25 +16,24 @@ import BookReviewForm from "./BookReviewForm";
 import Categories from "./Categories";
 import Reviews from "./Reviews";
 
+interface GetBookResponse {
+  status: string;
+  book: Book;
+}
+
 const BookDetailUser = () => {
   const { bookID } = useParams();
+
+  const bookQuery = useQuery<GetBookResponse>({
+    queryKey: ["books", bookID],
+    queryFn: () => getBookDetail(bookID ? bookID : ""),
+  });
+
   const { addToCart, clearCart } = useCart();
   const { user } = useAuth();
   const [book, setBook] = useState<Book | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [openReview, setOpenReview] = useState(false);
   const navigate = useNavigate();
-
-  async function getABook() {
-    setIsLoading(true);
-    try {
-      const response = await axios.get(`${API_URL}/books/${bookID}`);
-      setBook(response.data.book);
-    } catch (error) {
-      console.log(error);
-    }
-    setIsLoading(false);
-  }
 
   function handleAddToCart() {
     if (!user) {
@@ -53,7 +53,6 @@ const BookDetailUser = () => {
   }
 
   function handleBuyNow() {
-    //
     if (!user) {
       return navigate("/log-in");
     }
@@ -90,12 +89,7 @@ const BookDetailUser = () => {
     return totalRating / reviews.length;
   }
 
-  useEffect(() => {
-    getABook();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bookID]);
-
-  if (isLoading) {
+  if (bookQuery.isLoading) {
     return <LoadingBook backgroundColor="bg-[#F1F2F5]" />;
   }
 
@@ -104,38 +98,45 @@ const BookDetailUser = () => {
       <div
         className={`flex items-center justify-center rounded-md h-[500px] w-full lg:w-[600px] xl:h-[600px] xl:w-[700px] bg-book-card`}
       >
-        {book?.image && (
+        {bookQuery.data?.book?.image && (
           <img
             className="w-72 lg:w-[80%]"
-            src={`${BOOK_IMG_URL}/${book.image}`}
+            src={`${BOOK_IMG_URL}/${bookQuery.data.book.image}`}
             alt=""
           />
         )}
       </div>
 
       <div className="w-full p-5">
-        <h2 className={`text-2xl font-semibold`}>{book?.title}</h2>
-        <p className={`text-sm text-gray-500 `}>{book?.author} (author)</p>
+        <h2 className={`text-2xl font-semibold`}>
+          {bookQuery.data?.book.title}
+        </h2>
+        <p className={`text-sm text-gray-500 `}>
+          {bookQuery.data?.book.author} (author)
+        </p>
 
         <div className="flex items-center gap-2 my-5">
-          <AverageRating avgRating={book?.ratingsAverage || 4.5} />
+          <AverageRating
+            avgRating={bookQuery.data?.book.ratingsAverage || 4.5}
+          />
           <p className="text-sm text-gray-500">
-            ({book?.ratingsQuantity} <span>ratings</span>)
+            ({bookQuery.data?.book.ratingsQuantity} <span>ratings</span>)
           </p>
         </div>
 
-        <Categories categories={book?.categories || []} />
+        <Categories categories={bookQuery.data?.book.categories || []} />
 
         <p className="mt-5">
           <span className="text-sm text-gray-600">Available: </span>
-          {book?.quantity}
+          {bookQuery.data?.book.quantity}
         </p>
 
         <Divider marginY="my-10" />
 
         <div>
           <p className="text-xl font-medium">
-            <span className="text-sm text-gray-600">Only</span> ${book?.price}
+            <span className="text-sm text-gray-600">Only</span> $
+            {bookQuery.data?.book.price}
           </p>
         </div>
 
@@ -169,12 +170,14 @@ const BookDetailUser = () => {
 
         <div>
           <h2 className="text-xl font-semibold mb-3">Description</h2>
-          <p className="text-base text-gray-600">{book?.description}</p>
+          <p className="text-base text-gray-600">
+            {bookQuery.data?.book.description}
+          </p>
         </div>
 
         <Divider marginY="my-10" />
 
-        <Reviews reviews={book?.reviews || []} />
+        <Reviews reviews={bookQuery.data?.book.reviews || []} />
 
         <AnimatePresence initial={false} mode="wait">
           {openReview && (
