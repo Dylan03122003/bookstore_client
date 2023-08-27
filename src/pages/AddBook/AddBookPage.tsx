@@ -1,10 +1,8 @@
-import axios from "axios";
 import { useState } from "react";
-
-import { API_URL } from "../../api/config";
-import LoadingButton from "../../components/ui/LoadingButton";
-
+import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
+import { addBook } from "../../api/books";
+import LoadingButton from "../../components/ui/LoadingButton";
 import UploadImage from "../../components/ui/UploadImage";
 import AdminPageContainer from "../../components/wrapper/AdminPageContainer";
 import { useAuth } from "../../hooks/useAuth";
@@ -44,7 +42,12 @@ const AddBookPage = () => {
   const [imgFile, setImgFile] = useState<File | null>(null);
   const { dispatch } = useBook();
   const { user } = useAuth();
-  const [isLoading, setIsLoading] = useState(false);
+  const addBookMutation = useMutation(addBook, {
+    onSuccess(data) {
+      dispatch({ type: "ADD", newBook: data.book });
+      navigate("/books");
+    },
+  });
 
   function isDisabledBtn() {
     return (
@@ -72,8 +75,6 @@ const AddBookPage = () => {
   async function handleSubmit() {
     try {
       if (user?.token) {
-        setIsLoading(true);
-
         const formData = new FormData();
         if (imgFile) {
           formData.append("image", imgFile);
@@ -86,19 +87,11 @@ const AddBookPage = () => {
         formData.append("quantity", formValues.quantity + "");
         formData.append("title", formValues.title);
 
-        const response = await axios.post(`${API_URL}/books`, formData, {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-            "Content-Type": "multipart/form-data",
-          },
-        });
-        dispatch({ type: "ADD", newBook: response.data.book });
-        navigate("/books");
+        addBookMutation.mutate({ formData, token: user.token });
       }
     } catch (error) {
       console.log("MY ERROR: ", error);
     }
-    setIsLoading(false);
   }
   return (
     <AdminPageContainer>
@@ -173,14 +166,14 @@ const AddBookPage = () => {
       </div>
 
       <div className="w-full lg:w-[700px] mx-auto flex items-center justify-center sm:justify-end">
-        {!isLoading ? (
+        {!addBookMutation.isLoading ? (
           <Button
-            disabled={isLoading || isDisabledBtn()}
+            disabled={addBookMutation.isLoading || isDisabledBtn()}
             backgroundColor="bg-blue-500"
             textColor="text-white"
             onClick={handleSubmit}
           >
-            {isLoading ? "Loading" : "Submit"}
+            {addBookMutation.isLoading ? "Loading" : "Submit"}
           </Button>
         ) : (
           <LoadingButton />

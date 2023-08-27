@@ -12,3 +12,19 @@ export const getBookDetail = async (bookID: string) => {
   const response = await axios.get(`${API_URL}/books/${bookID}`);
   return response.data;
 };
+
+export const addBook = async ({
+  formData,
+  token,
+}: {
+  formData: FormData;
+  token: string;
+}) => {
+  const response = await axios.post(`${API_URL}/books`, formData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return response.data;
+};
