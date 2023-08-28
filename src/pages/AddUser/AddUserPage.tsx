@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { BsPerson } from "react-icons/bs";
 import { RxLockClosed } from "react-icons/rx";
+import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { API_URL } from "../../api/config";
+import { addUser } from "../../api/books";
 import SingleSelect from "../../components/ui/SingleSelect";
 import AdminPageContainer from "../../components/wrapper/AdminPageContainer";
 
-interface CreatedUser {
+export interface CreatedUser {
   name: string;
   email: string;
   role: string;
@@ -23,9 +24,29 @@ const AddUserPage = () => {
     role: "user",
   });
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  const addUserMutation = useMutation(addUser, {
+    onSuccess() {
+      setErrorMessage("");
+      navigate("/users");
+    },
+
+    onError() {
+      setErrorMessage("Email already in use");
+    },
+    onSettled() {
+      setCreatedUser({
+        name: "",
+        email: "",
+        password: "",
+        passwordConfirm: "",
+        role: "user",
+      });
+      setSubmitted(false);
+    },
+  });
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -40,7 +61,6 @@ const AddUserPage = () => {
   }
 
   async function handleSubmit(event: React.FormEvent) {
-    //
     event.preventDefault();
     setSubmitted(true);
 
@@ -64,40 +84,7 @@ const AddUserPage = () => {
       return;
     }
 
-    setIsLoading(true);
-
-    const response = await fetch(`${API_URL}/users/sign-up`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(createdUser),
-    });
-
-    const jsonData = await response.json();
-
-    setIsLoading(false);
-
-    if (response.ok) {
-      setErrorMessage("");
-      navigate("/users");
-    }
-
-    if (!response.ok) {
-      // setErrorMessage(jsonData.message);
-      if (jsonData.message === "Disallow duplicate values") {
-        setErrorMessage("Email already in use");
-      }
-    }
-
-    setCreatedUser({
-      name: "",
-      email: "",
-      password: "",
-      passwordConfirm: "",
-      role: "user",
-    });
-    setSubmitted(false);
+    addUserMutation.mutate(createdUser);
   }
 
   return (
@@ -256,11 +243,11 @@ const AddUserPage = () => {
             )}
           </div>
           <button
-            disabled={isLoading}
+            disabled={addUserMutation.isLoading}
             type="submit"
             className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded w-full mt-5 sm:mb-0 mb-10"
           >
-            {isLoading ? "Loading..." : "Save"}
+            {addUserMutation.isLoading ? "Loading..." : "Save"}
           </button>
         </form>
       </div>

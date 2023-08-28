@@ -1,4 +1,5 @@
 import axios from "axios";
+import { CreatedUser } from "../pages/AddUser/AddUserPage";
 import { API_URL } from "./config";
 
 export const getAllBooks = async (page = 1, limit = 8) => {
@@ -24,6 +25,15 @@ export const addBook = async ({
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "multipart/form-data",
+    },
+  });
+  return response.data;
+};
+
+export const addUser = async (user: CreatedUser) => {
+  const response = await axios.post(`${API_URL}/users/sign-up`, user, {
+    headers: {
+      "Content-Type": "application/json",
     },
   });
   return response.data;
