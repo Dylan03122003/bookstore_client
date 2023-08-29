@@ -1,6 +1,6 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { API_URL, BOOK_IMG_URL, IMAGE_URL } from "../../api/config";
+import { useQuery } from "react-query";
+import { BOOK_IMG_URL, IMAGE_URL } from "../../api/config";
+import { getAllOrders } from "../../api/orders";
 import OrderStatus from "../../components/order/OrderStatus";
 import NothingInCart from "../../components/ui/NothingInCart";
 import AdminPageContainer from "../../components/wrapper/AdminPageContainer";
@@ -9,35 +9,21 @@ import { useAuth } from "../../hooks/useAuth";
 import { getTitle } from "../../utils/renderBookProperties";
 import LoadingAllOrder from "./LoadingAllOrder";
 
+interface AllOrdersResponse {
+  status: string;
+  result: number;
+  orders: FullOrder[];
+}
+
 const AllOrderPage = () => {
   const { user } = useAuth();
-  const [isLoading, setIsLoading] = useState(false);
-  const [allOrders, setAllOrders] = useState<FullOrder[]>([]);
 
-  useEffect(() => {
-    async function getMyOrder() {
-      try {
-        setIsLoading(true);
-        if (user?.token) {
-          const response = await axios.get(`${API_URL}/orders`, {
-            headers: {
-              Authorization: `Bearer ${user.token}`,
-              "Content-Type": "application/json",
-            },
-          });
-          setAllOrders(response.data.orders); // Set allOrders state with the retrieved data
-        }
-      } catch (error) {
-        console.log("MY ORDER ERROR ", error);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    getMyOrder();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const allOrdersQuery = useQuery<AllOrdersResponse>({
+    queryKey: ["orders"],
+    queryFn: () => getAllOrders(user?.token ? user.token : ""),
+  });
 
-  if (isLoading) {
+  if (allOrdersQuery.isLoading) {
     return (
       <AdminPageContainer>
         <div className="mt-10">
@@ -47,7 +33,7 @@ const AllOrderPage = () => {
     );
   }
 
-  if (allOrders.length === 0) {
+  if (allOrdersQuery.data?.result === 0) {
     return (
       <AdminPageContainer>
         <NothingInCart
@@ -78,8 +64,8 @@ const AllOrderPage = () => {
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
-          {allOrders &&
-            allOrders.map((order) => (
+          {allOrdersQuery.data?.orders &&
+            allOrdersQuery.data.orders.map((order) => (
               <tr
                 className="cursor-pointer"
                 key={order._id}
