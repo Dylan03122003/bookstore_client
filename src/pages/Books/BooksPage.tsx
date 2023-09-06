@@ -1,11 +1,12 @@
 import { useState } from "react";
+import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
+import { getAllBooks } from "../../api/books";
 import { BOOK_IMG_URL } from "../../api/config";
 import Categories from "../../components/book/Categories";
 import SingleSelect from "../../components/ui/SingleSelect";
 import AdminPageContainer from "../../components/wrapper/AdminPageContainer";
 import { Book } from "../../context/Book/BookType";
-import { useBook } from "../../hooks/useBook";
 import { getDescription, getTitle } from "../../utils/renderBookProperties";
 import {
   compareBookAuthors,
@@ -14,11 +15,25 @@ import {
   compareBookTitles,
 } from "../../utils/sorting";
 
+interface BooksResponse {
+  status: string;
+  totalBooks: number;
+  result: number;
+  books: Book[];
+}
 const BooksPage = () => {
-  const { books } = useBook();
+  const booksQuery = useQuery<BooksResponse>({
+    queryKey: ["books"],
+    queryFn: () => getAllBooks(),
+  });
+
+  const books = booksQuery.data?.books;
+
   const navigate = useNavigate();
   const [sortedBooks, setSortedBooks] = useState<Book[] | null>(
-    books ? [...books].sort(compareBookTitles) : books
+    booksQuery.data?.books
+      ? [...booksQuery.data.books].sort(compareBookTitles)
+      : []
   );
 
   function goToDetailPage(bookID: string) {
@@ -27,13 +42,13 @@ const BooksPage = () => {
 
   function handleSortBy(tag: string) {
     if (tag === "title") {
-      setSortedBooks(books ? [...books].sort(compareBookTitles) : books);
+      setSortedBooks(books ? [...books].sort(compareBookTitles) : []);
     } else if (tag === "price") {
-      setSortedBooks(books ? [...books].sort(compareBookPrices) : books);
+      setSortedBooks(books ? [...books].sort(compareBookPrices) : []);
     } else if (tag === "quantity") {
-      setSortedBooks(books ? [...books].sort(compareBookQuantity) : books);
+      setSortedBooks(books ? [...books].sort(compareBookQuantity) : []);
     } else if (tag === "author") {
-      setSortedBooks(books ? [...books].sort(compareBookAuthors) : books);
+      setSortedBooks(books ? [...books].sort(compareBookAuthors) : []);
     }
   }
 

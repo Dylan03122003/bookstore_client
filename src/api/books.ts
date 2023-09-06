@@ -38,3 +38,18 @@ export const addUser = async (user: CreatedUser) => {
   });
   return response.data;
 };
+
+export const deleteBook = async ({
+  bookID,
+  token,
+}: {
+  bookID: string;
+  token: string;
+}) => {
+  await axios.delete(`${API_URL}/books/${bookID}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  });
+};
